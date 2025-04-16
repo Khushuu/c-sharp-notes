@@ -1,0 +1,43 @@
+Built-in datatypes in c#
+
+- Boolean type - bool flag - can be true or false 
+- Integer types
+	- sbyte - 	signed 8-bit integer - 		(Range: -128 to 127)
+	- byte - 	unsigned 8-bit integer - 	(Range: 0 to 255)
+	- char - 	unicode 16-bit character
+	- short - 	signed 16-bit integer - 	(Range: -2^15 to 2^15 - 1)
+	- ushort - 	unsigned 16-bit integer - 	(Range: 0 to 2^16 - 1)
+	- int - 	signed 32-bit integer - 	(Range: -2^31 to 2^31 - 1)
+	- uint - 	unsigned 32-bit integer - 	(Range: 0 to 2^32 - 1)
+	- long - 	signed 64-bit integer - 	(Range: -2^63 to 2^63 - 1)
+	- ulong - 	unsigned 64-bit integer - 	(Range: 0 to 2^63 - 1)
+
+	- to get the min value of a datatype use method - int.MinValue
+	- to get the max value of a dataype use method - int.MaxValue
+
+- Floating types 
+	- float - 	32-bit integer - after decimal precision - 7 digits
+	- double - 	64-bit integer - after decimal precision - 15-16 digits
+
+- Decimal types 
+	- decimal - 128-bit integer - after decimal precision - 28-29 digits
+
+NOTE: implicit conversion from decimal to integer is not supported in c#
+eg: 
+int val = 23.12 (this will give error)
+
+- String type 
+	- enclosed within double quotes
+
+- Escape sequence characters 
+	- used to print characters with special meanings(", ') or some non printable characters 
+	- \n - new line
+	- \" - for double quote 
+	- \' - for single quote 
+	- \b - for backspace 
+	- \\ - for backslash
+
+- Verbatim literal - @ infront of a string 
+	- treats escape sequences as regular printable characters 
+	- eg:
+	- string path = @"C:/Users/kvashish"  - prints the exact thing 
