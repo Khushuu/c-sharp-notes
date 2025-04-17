@@ -1,0 +1,71 @@
+# LOOPS
+
+-----------------------------------------------------------------------------------------------------------------
+
+# WHILE LOOP
+
+int i = 0;
+int n = 6;
+
+while(i < n) {
+
+	Console.WriteLine(i);
+	i++;
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# DO WHILE LOOP 
+
+- whatever is inside will be executed at least once 
+- irrespective if the while condition is satisfied or not 
+
+int i = 0;
+int n = 10;
+
+do {
+	Console.WriteLine(i);
+	i++;
+}
+while(i < n);
+
+- in the output 0 will always be written even if i is not less than n
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Difference between while loops and do while loops 
+
+- while loop checks the condition at the start of the loop
+- do while loop checks the condition at the end of the loop 
+
+- do while loop is guaranteed to be executed at least once 
+- while loop will only be executed if the condition is satisfied 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# FOR LOOP
+
+int[] nums = {1, 2, 3};
+
+for(int i = 0; i < nums.Length; i++) {
+
+	Console.WriteLine(nums[i]);
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# FOREACH LOOP 
+
+- loops over all item in the collection
+
+int[] nums = {1, 2, 3};
+
+for(int num in nums)
+	Console.WriteLine(nums[i]);
+
+-----------------------------------------------------------------------------------------------------------------
+
+break: breaks out of the loop 
+continue: does not execute the rest of the code inside the loop, moves to next iteration 
+
+-----------------------------------------------------------------------------------------------------------------

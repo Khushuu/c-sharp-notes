@@ -1,5 +1,7 @@
 Built-in datatypes in c#
 
+-----------------------------------------------------------------------------------------------------------------
+
 - Boolean type - bool flag - can be true or false 
 - Integer types
 	- sbyte - 	signed 8-bit integer - 		(Range: -128 to 127)
@@ -15,16 +17,24 @@ Built-in datatypes in c#
 	- to get the min value of a datatype use method - int.MinValue
 	- to get the max value of a dataype use method - int.MaxValue
 
+-----------------------------------------------------------------------------------------------------------------
+
 - Floating types 
 	- float - 	32-bit integer - after decimal precision - 7 digits
 	- double - 	64-bit integer - after decimal precision - 15-16 digits
 
+-----------------------------------------------------------------------------------------------------------------
+
 - Decimal types 
 	- decimal - 128-bit integer - after decimal precision - 28-29 digits
+
+-----------------------------------------------------------------------------------------------------------------
 
 NOTE: implicit conversion from decimal to integer is not supported in c#
 eg: 
 int val = 23.12 (this will give error)
+
+-----------------------------------------------------------------------------------------------------------------
 
 - String type 
 	- enclosed within double quotes
@@ -37,7 +47,23 @@ int val = 23.12 (this will give error)
 	- \b - for backspace 
 	- \\ - for backslash
 
+-----------------------------------------------------------------------------------------------------------------
+
 - Verbatim literal - @ infront of a string 
 	- treats escape sequences as regular printable characters 
 	- eg:
 	- string path = @"C:/Users/kvashish"  - prints the exact thing 
+
+-----------------------------------------------------------------------------------------------------------------
+
+Short Circuit operator - && (AND) and || (OR)
+
+- &&: if any condition is false doesn't check the next condition - result will be false 
+- ||: if any condition is true doesn't check the next condition - result will be true
+
+hence called short circuit operator 
+
+- &: checks all the conditions 
+- |: checks all the conditions 
+
+-----------------------------------------------------------------------------------------------------------------
