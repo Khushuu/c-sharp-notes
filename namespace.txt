@@ -1,0 +1,31 @@
+# Namespace
+
+- used to organize program 
+- do not correspond to file, assembly or directory names 
+- they could be written in separate file or assembly but still belong to the same namespace 
+
+- namespace can contain 
+	- another namespace 
+	- class 
+	- interface 
+	- struct 
+	- enum 
+	- delegate 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Namespace Alias directives 
+
+- using an alias name for a namespace 
+- instead of using fully qualified name when calling a method
+- this is done when different namespaces have classes or methods of same name 
+
+e.g 
+
+using smart = Playground.Smart;
+
+- fully qualified name 
+
+Playground.Smart.Method();
+
+-----------------------------------------------------------------------------------------------------------------
