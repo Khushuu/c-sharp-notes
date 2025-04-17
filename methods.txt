@@ -59,5 +59,70 @@ namespace Work {
 		Method m = new Methods();
 		m.PrintEven(); // using instance of the class to call the instance method 
 
+-----------------------------------------------------------------------------------------------------------------
 
+# Class Members
 
+- static member
+- instance member
+
+- if a static modifier is present then it is static members 
+- else it is an instance members 
+
+- mark a field as static if it does not change on the basis of instance
+- e.g 
+	- to calculate the area of the circle: pi * r * r
+	- since the value of pi stays the same for all instances 
+	- mark pi as a static field
+	- then for each newly created instance of class same pi value will be referred
+	- if it was not static each instance will have a copy of pi and radius fields
+
+- only single copy of the static member is created no matter how many instance of class are created
+- same copy of the static member will then be used by all the instances of the class 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g: 
+
+internal class Year
+{
+
+	public static int century;
+	int year;
+
+	static Year()
+	{	
+		Console.WriteLine("static constructor called");
+		century = 2000;
+	}
+
+	public Year(int year) { 
+		this.year = year;
+	}
+
+	public void PrintYear()
+	{
+		Console.WriteLine("Current year is: {0}", century + year);
+	}
+}
+
+// static constructor is called before any constructor or member
+Console.WriteLine(Year.century);
+
+Year y = new Year(25);
+y.PrintYear();
+
+Year y2 = new Year(30);
+y2.PrintYear();
+
+// output 
+static constructor called
+2000
+
+instance constructor called
+Current year is: 2025
+
+instance constructor called
+Current year is: 2030
+
+-----------------------------------------------------------------------------------------------------------------

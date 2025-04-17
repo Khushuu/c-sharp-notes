@@ -1,0 +1,103 @@
+# Class 
+
+- classes can be used to create complex custom types 
+- class also has access modifiers
+
+- a class defined at the namespace level (not inside another class)
+	- default access modifier: internal 
+	- The class is accessible only within the same assembly (project)
+	- Not accessible from other projects unless explicitly made public
+
+- a class defined inside another class
+	- default access modifier: private
+	- it's only accessible within the containing class
+
+
+- class consists of state (data) and behaviour
+- class state: represented by fields (properties)
+- class behaviour: represented by methods (functions)
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Constructor 
+
+- have same name as the class 
+- does not return a value - no return type
+- it is used to intialized class fields
+- gets called when an instance of the class is created
+- can be overloaded by the number and type of parameters 
+
+- even they have access modifiers like methods 
+
+static construct:
+    - called only once no matter how many instances are created 
+	- called before instance constructor or any other field 
+	- does not have access modifiers 
+	- used to initialize static fields 
+i.e 
+	public static Customer() - Incorrect - RUNTIME ERROR 
+	static Customer() - this works 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Default Constuctor
+
+- if a constructor is not explicity declared a default paramterless constructor is implicitly provided
+- it initializes class fields to there default value 
+- it will be removed if an explicit constuctor is written
+- that means this constructor with no parameters can not be used if u explicitly define a constructor
+
+- this keyword: refers to an instance of the class
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Destructors
+
+- have same name as class 
+- do not take any parameter
+- do not have a return type 
+- have a ~(tilde) infront of them
+- c# does not require destructors - automatically called by garbage collector
+- used to clean up resources hold by the class
+
+e.g
+
+~Customer() {}
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+internal class Customer
+{
+    // fields
+    string firstName, lastName;
+
+    // 0 paramter constructor
+    public Customer() {
+        this.firstName = "";
+        this.lastName = "";
+    }
+
+    // constructor initializing fields
+    public Customer(string firstName, string lastName) { 
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    
+    public void PrintName()
+    {
+        Console.WriteLine("name: {0} {1}", firstName, lastName);
+    }
+
+    // destructor
+    ~Customer() { }
+}
+
+Customer c1 = new Customer();
+c1.PrintName();
+
+Customer c2 = new Customer("khushboo", "vashishth");
+c2.PrintName();
+
+-----------------------------------------------------------------------------------------------------------------
