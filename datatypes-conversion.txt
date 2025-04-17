@@ -1,0 +1,77 @@
+----------------------------------------------------------------------------------------------------
+Implicit conversion is done by the compiler 
+
+- when there is no loss of information if the conversion is done 
+- e.g:
+- assigning datatype with smaller capacity to one with higher capacity
+
+- if there is no possibility of throwing exceptions during the conversion
+
+e.g
+int i = 5;
+float f = i; (no error - implicit conversion) 
+
+[converting an int to a float will not losse any data and no exception will be thrown]
+
+----------------------------------------------------------------------------------------------------
+
+- however when converting a float to an int
+- the fractional part is lost
+- also possibility of overflow exception 
+
+Hence we nee to do explicit conversion. Use cast operator or convert class for explicit conversion
+
+----------------------------------------------------------------------------------------------------
+
+# type casting
+// explicit conversion 
+
+float f = 3.556f;
+int k = (int)f;
+
+# using Convert class 
+
+k = Convert.ToInt32(f);
+
+NOTE: 
+- in case of overflow - type casting will just assing minValue possible and not throw error
+- in case of overflow - Convert class method throw overflow exceptions 
+
+----------------------------------------------------------------------------------------------------
+
+If a number is in string format to convert it there are two options 
+
+- Parse() - throws exception if it can not parse the value
+- TryParse - returs bool indicating whether parsing successful or not 
+
+- Use Parse() if it is sure that value will be valid, otherwise use TryParse()
+
+NOTE: u can use float.Parse(), double.Parse() --> with any datatype when u want to convert string to any other type 
+----------------------------------------------------------------------------------------------------
+
+# Parse
+
+- to convert a string to a number 
+
+string s = "123";
+int i = int.Parse(s);
+
+// if s = "123kl" - an invalid number then Int.Parse will throw format exception 
+
+// using int.TryParse - won't throw exception - returns 0
+// result is returned as an output parameter
+
+----------------------------------------------------------------------------------------------------
+
+# TryParse
+
+s = "123fff";
+
+bool flag = int.TryParse(s, out int result); 
+
+if(flag) Console.WriteLine(result);
+else Console.WriteLine("not success");
+
+NOTE: return type of TryParse method is a boolean value. It is used to check if parsing will succeed or not. 
+
+----------------------------------------------------------------------------------------------------

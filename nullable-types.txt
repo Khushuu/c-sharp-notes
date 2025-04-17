@@ -1,0 +1,38 @@
+C# types 
+
+-----------------------------------------------------------------------------------------------------------------
+
+Value types: 
+	- int, double, float, structs, enum etc
+	- built in data types
+	- default value for value types depends on their data type 
+
+Reference types 
+	- string : built in reference type
+	- class, interface, delegates, arrays etc 
+	- default value for reference type is null
+
+-----------------------------------------------------------------------------------------------------------------
+
+By default value types are non nullable. To make them nullable use ?
+
+int i = null (compiler error - int is a value type and is non nullable)
+Error: can not convert null to 'int' because it is a non-nullable value type 
+
+int? j = null (j is nullable, so allowed as we used ? to make it nullable)
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Null Coalescing operator
+
+used when we want to assign a non nullable value to a variable
+
+int i? = null 
+int k? = null
+int j = i ?? k ?? 0 [if i not null set j to i else if i null set i to 0]
+// output = 0
+
+can be used in a change will keep moving to right until a non null value is found 
+
+-----------------------------------------------------------------------------------------------------------------
+
