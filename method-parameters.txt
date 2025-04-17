@@ -1,0 +1,117 @@
+# METHOD PARAMETERS
+
+- value parameters
+- reference parameters
+- out parameters 
+- parameter array 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Value parameter
+	- creates a copy of the parameter passed so modifications do not affect each other 
+	- changes done in the method will not be reflected outside in the calling method 
+
+# Pass by Value
+
+- i and j point to different memory locations
+- operations done on one variable will not affect the value of other variable
+
+e.g
+
+private static void PassByValue(int k)
+{
+    k = 10;
+}
+
+public void Pass()
+{
+    int i = 0;
+
+    PassByValue(i);
+    Console.WriteLine("Pass By Value: {0}", i); // 0
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Reference parameter 
+	- use ref keyword before parameter declaration inside paranthesis
+	- it will refer to the same parameter for which method was called 
+	- changes done in the method will also be reflected outside in the calling method 
+
+# Pass by reference 
+
+- i and j point to same memory locations
+- operations done on one variable will affect the value of other variable
+
+e.g
+
+private static void PassByReference(ref int k) {
+    k = 100;
+}
+
+public void Pass()
+{
+    int i = 0;
+
+    PassByReference(ref i);
+    Console.WriteLine("Pass By Reference: {0}", i); // 100
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Out parameter
+	- when u want a method to return more than one value 
+	- out parameters can be declared in the calling function itself 
+
+e.g 
+
+public void Calculate(int a, int b, out int sum, out int subtract, out int product, out int division)
+{
+	sum = a + b;
+	subtract = b - a;
+	product = a * b;
+	division = a / b;
+}
+
+int a = 10, b = 20;
+m.Calculate(a, b, out int sum, out int subtract, out int product, out int division);
+
+// Sum: 30, Subtract: 10, Product: 200, Division: 0
+Console.WriteLine("Sum: {0}, Subtract: {1}, Product: {2}, Division: {3}", sum, subtract, product, division);
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Parameter arrays 
+	- parameter arrays (params) allow you to pass a variable number of arguments to a method
+	- declare a parameter array using the params keyword
+	- You can only have one params in a method signature
+	- It must be the last parameter in the method signature
+	- If no arguments are passed, the parameter array is just an empty array
+	- Behind the scenes, it’s just a regular array
+
+e.g:
+
+public void PrintNumbers(params int[] numbers)
+{
+    foreach (int number in numbers)
+    {
+        Console.WriteLine(number);
+    }
+}
+
+You can call the method with: 
+
+- Any number of int arguments:
+	
+	PrintNumbers(1, 2, 3, 4, 5);
+
+- Or with an int[] array:
+	
+	int[] nums = { 10, 20, 30 };
+	PrintNumbers(nums);
+
+- or with no arguments 
+	
+	PrintNumbers(); // this is also valid
+
+-----------------------------------------------------------------------------------------------------------------

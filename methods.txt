@@ -1,0 +1,63 @@
+# Methods 
+
+-----------------------------------------------------------------------------------------------------------------
+
+- also called as functions 
+- define the logic once and can be reused multiple times 
+
+Structure of Methods:
+
+[attributes]
+access-modifiers return-type method-name (parameters) {
+	
+	method body
+}
+
+return-type: can be any valid data type or void 
+method-name: defines the functionality 
+parameters: optional 
+
+e.g 
+
+namespace Work {
+
+	public class Methods {
+
+		private bool IsEven(int num) {
+			return num % 2 == 0;
+		}
+
+		public void PrintEven()
+		{
+			for(int i = 0; i < 10; i++)
+			{
+				if (IsEven(i))
+					Console.WriteLine(i);
+			}
+		}
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# STATIC and INSTANCE METHODS 
+
+- static method: 
+	- if a static modifier is present in the signature of a method 
+	- it is invoked using class name
+	- often used for utility or helper functions
+	- cannot access instance members (fields or methods) unless they are passed in as parameters 
+	- as we do not declare any instance but directly call using class name 
+	- e.g:
+		Methods.PrintEven(); // using class to call the static method
+
+- instance method: 
+	- no static modifier is present 
+	- it is invoked using an instance of the class 
+	- can access both instance and static members of the class
+	- e.g:
+		Method m = new Methods();
+		m.PrintEven(); // using instance of the class to call the instance method 
+
+
+
