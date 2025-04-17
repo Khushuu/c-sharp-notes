@@ -1,0 +1,90 @@
+
+# Pillars of Object Oriented Programming (OOPS)
+
+- inheritance
+- encapsulation
+- abstraction
+- polymorphism
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Inheritance
+
+- move the common code in the base class
+- only keep specific code in respective derived class
+
+NOTE:
+- c# only supports SINGLE CLASS INHERITANCE
+- c# supports MULTIPLE INTERFACE INHERITANCE
+- multi level class inheritance is supported i.e A <- B <- C <- D [A inherits from B, B from C, C from D]
+
+- derived class inherits from base class
+- child class is specialization of base class
+
+- base class are automatically instantiated before derived class
+- base class constructor executes before derived class constructor 
+- use base keyword if u want to call specific constructor of base from derived class
+
+- base class is also called parent class
+- derived class is also called child class 
+
+- e.g
+	public class Base {
+
+		public Base() {
+
+			Console.WriteLine("base class constructor");
+		}
+
+		public Base(string message) {
+
+			Console.WriteLine(message);
+		}
+
+		public void Print() {
+			Console.WriteLine("this is base class print method");
+		}
+	}	
+
+	public class Derived: Base {
+
+		public Derived(): base("hello from derived") {
+
+			Console.WriteLine("derived class constructor");
+		}
+
+		public new void Print() {
+			Console.WriteLine("this is derived class print method");
+		}
+	}	
+
+	Derived d = new Derived();
+
+	// output 
+	hello from derived
+	derived class constructor
+
+	- if base constructor was not controlled from derived constructor
+	// output 
+	base class constructor
+	derived class constructor
+-----------------------------------------------------------------------------------------------------------------
+
+# Method Hiding 
+
+- use new keyword if a method that is already in base class is written in derived class 
+- doing this hides the method in the base class 
+- derived class method is then called 
+
+public new void print() {} // derived class method - this hides base class method 
+
+- if u still want to call base class print method there r two ways 
+
+- type casting 
+- implicit casting 
+
+((Base)d).Print(); // calls base class print method - type castig 
+
+Base b = new Derived(); // a base class objects refers to child class 
+// possible as b can be contained in Derived class
+// it has all the members that base has  
