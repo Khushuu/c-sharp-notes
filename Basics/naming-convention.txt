@@ -1,0 +1,12 @@
+✅ Recommended Naming Convention
+
+Member Type				Convention		Example
+
+private field			_camelCase 		with underscore prefix:	_name, _age, _count
+public field			PascalCase 		but public fields are rare:	Name, Age
+
+Property				PascalCase		Name, Gender
+Method					PascalCase		Print(), GetAge()
+
+Local variable			camelCase		count, total
+Parameter				camelCase		int age, string name
