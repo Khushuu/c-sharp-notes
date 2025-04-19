@@ -101,3 +101,114 @@ NOTE:
 
 - derived class object is assigned to base class reference 
 Base b = new Derived(); // this is valid 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Diamond problem - why multiple class inheritance
+
+- suppose class B and class C inherit from class A
+- both classes B and C have overridden a virtual method defined in class A
+- if class D inherites from both class B and C and does not override method in class A
+- then when object of class D invokes the method defined in A then which implementation of the method should be executed the one defined in B or C 
+
+- this ambiguity is called diamond problem - called this because of the shape it forms 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+// Diamond problem
+
+public class A
+{
+	public virtual void Print()
+	{
+		Console.WriteLine("hello from A");
+	}
+}
+
+public class B: A
+{
+	public override void Print()
+	{
+		Console.WriteLine("hello from B");
+	}
+}
+
+public class C : A
+{
+	public override void Print()
+	{
+		Console.WriteLine("hello from C");
+	}
+}
+
+// not allowed 
+public class D : B, C
+{
+	
+}
+
+// d.Print() // which implementation to call 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Multiple interface inheritance to solve this issue
+
+e.g 
+
+public interface IA
+{
+	void PrintAA();
+}
+
+public class AA: IA
+{
+	public void PrintAA()
+	{
+		Console.WriteLine("print AA");
+	}
+
+}
+
+public interface IB
+{
+	void PrintBB();
+}
+
+public class BB : IB
+{
+	public void PrintBB()
+	{
+		Console.WriteLine("print BB");
+	}
+
+}
+
+// inherit from multiple interfaces instead of classes
+
+public class CC: IA, IB
+{
+	AA a = new AA();
+	BB b = new BB();
+
+	// use same implementatin present in class AA and BB
+	public void PrintAA()
+	{
+		a.PrintAA();
+	}
+
+	public void PrintBB()
+	{
+		b.PrintBB();
+	}
+}
+
+CC cc = new CC();
+cc.PrintAA();
+cc.PrintBB();
+
+// Output 
+print AA
+print BB
+-----------------------------------------------------------------------------------------------------------------
