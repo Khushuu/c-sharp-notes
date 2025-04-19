@@ -3,14 +3,32 @@ C# types
 -----------------------------------------------------------------------------------------------------------------
 
 Value types: 
+	
 	- int, double, float, structs, enum etc
 	- built in data types
 	- default value for value types depends on their data type 
+	
+	- stored in stack
+	- holds the value in memory where they are declared
+	- destroyed immediately after the scope is lost
+
+	- when u copy a value type to another value type, a new copy is created 
+	- modifications to one will not affect the values contained by another 
 
 Reference types 
+	
 	- string : built in reference type
 	- class, interface, delegates, arrays etc 
 	- default value for reference type is null
+
+	- object created is stored in heap and the object reference variable is stored in stack
+	- holds reference to an object in memory 
+	- only the reference variable is destroyed after the scope is lost 
+	- the object is later destroyed by garbage collector 
+
+	- when a reference type is copied to another, we only get a copy of the reference variable
+	- both the reference variable point to same object on the heap
+	- operations done on one variable will affect the values contained by other reference variable
 
 -----------------------------------------------------------------------------------------------------------------
 

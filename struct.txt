@@ -1,0 +1,63 @@
+# Structs 
+
+Structs can have
+
+- private fields
+- public properties
+- constructors
+- methods 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Difference between struct and class
+
+- All differences between value type and reference type applicable to struct and class 
+
+Struct 
+
+- it is value type
+- can't have destructors
+- can not have explicit parameter-less constructor
+- can not inherit from another class 
+- e.g - int(System.Int32), double(System.Double), etc
+
+Class
+
+- it is reference type
+- can have destructors
+- can have explicit parameter-less constructor
+- can inherit from another class
+
+-----------------------------------------------------------------------------------------------------------------
+
+NOTE:
+
+- struct are sealed types 
+- a class or struct can not inherit from struct 
+
+- sealed keyword prevents a class from being inherited
+
+e.g:
+
+// won't act as a parent of any class because sealed keyword is used
+public sealed class BaseClass {
+
+}
+
+// throws compile time error
+public class DerivedClass: BaseClass {
+
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+public struct Student {
+
+	public string Name {get; set;}
+
+	public Student {
+		Console.WriteLine("this is a constructor");
+	}
+}

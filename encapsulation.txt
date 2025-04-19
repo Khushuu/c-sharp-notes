@@ -1,0 +1,61 @@
+# Encapsulation
+
+- a class field should not be declared public 
+- use getter and setter method instead or properties to encapsulate and protect fields
+- advantage of properties over getter and setter traditional methods is that you can access them as if they were public fields
+
+In c# to encapsulate and protect fields we use properties
+
+- use get and set accessors to implement properties
+- use value inside the properites setter method when assigning to private fields
+
+- read and write property: {get; set;}
+- read property: {get;}
+- write property: {set;}
+
+-----------------------------------------------------------------------------------------------------------------
+
+Auto-implemented properties
+
+- if there is no additional logic in the property accessors, we can use auto-implemented properties
+- the compiler will itself create private anonymous fields 
+- these fields can only be accessed using property's get and set accessors
+
+public string Name {get; set;}
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+public class Encapsulation
+{
+
+    // id can not be 0 or negative - get and set accesor
+    private int _id;
+	
+    // pass marks - read only value
+    private int _marks;
+
+    // auto-implemented properties 
+    public string Name { get; set; }
+
+    public int Id { 
+        
+        get 
+        { 
+             return _id; 
+        } 
+
+        set 
+        {
+            if (value <= 0) throw new Exception("id should be greater than 0");
+            _id = value; 
+        } 
+    }
+
+    // read only property
+    public int Marks
+    {
+        get { return _marks; } 
+    }
+}
