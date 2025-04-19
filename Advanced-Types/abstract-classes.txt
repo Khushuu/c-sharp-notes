@@ -1,0 +1,75 @@
+# Abstract classes
+
+- use abstract keyword to create abstract classes
+- use override keyword when implementing abstract memebers in the derived class of abstract class 
+- an abstract class may contain abstract members(methods, properties, indexes, events) but not mandatory
+
+- an abstract class is incompelete and hence can not be instantiated - can't have an object of abstract class 
+- an abstract class can only be used as base class
+- an abstract class can not be sealed - as sealed keyword prevents the class from getting inherited 
+
+- a non-abstract class derived from an abstract class must provide implementation for all inherited abstract members
+
+NOTE:
+
+- if a class inherits from an abstract class, then there are 2 options available for the class
+	- provide implementation for all the abstract members inherited from the base abstract class
+	- else mark the class as abstract if it does not wish to provide implementation of abstract class methods
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Difference between abstract classes and interfaces
+
+Abstract Class 
+
+- can have implementation for some of its members 
+- members can have access modifiers
+- can have fields
+- can inherit from another interface or another abstract class
+
+Interface
+
+- can't have implementation for any of its memebers - NOT VALID FOR LATEST VERSION OF C#
+- can not have access modifiers - NOT VALID FOR LATEST VERSION OF C#
+- can not have fields
+- can only inherit from an interface and not from an abstract class
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g:
+
+public abstract class Base
+{
+	// non-abstract member 
+	public void Print()
+	{
+		Console.WriteLine("non-abstract print method");
+	}
+
+	// abstract members - only definition
+	public abstract void PrintMessage(string message);
+	public abstract void TalkToMe(string message);
+}
+
+// abstract class - can or can not implement abstract members of base class
+// only implements one abstract method not the other
+
+public abstract class Derived1: Base
+{
+	public override void TalkToMe(string message) {  Console.WriteLine(message); }
+}
+
+// non-abstract class: has to implement all abstract members of base class
+// use override keyword to implement abstract members
+
+public class Derived2: Base
+{
+	public override void PrintMessage(string message)
+	{
+		Console.WriteLine(message);
+	}
+
+	public override void TalkToMe(string message) { Console.WriteLine(message); }
+}
+
+-----------------------------------------------------------------------------------------------------------------
