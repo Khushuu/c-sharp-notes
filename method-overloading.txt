@@ -1,0 +1,58 @@
+
+# Method Overloading
+
+- allows a class to have multiple methods with the same name but with different signatures 
+- functions can be overloaded on the basis of 
+	- number of parameters
+	- type of parameters: int, float, etc
+	- kind of parameters: value, ref or out
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Signature of a method
+
+Signature of a method consists of 
+	- name of the method
+	- number of parameters
+	- type of parameters
+	- kind of parameters
+
+Signature of a method does not include 
+	- return type of the method
+	- params modifier
+
+NOTE: It is not possible to overload a method on the basis of return type or params modifier - throws error at compile time
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+public class MethodOverloading
+{
+
+	public void Add(int a, int b)
+	{
+		Console.WriteLine("sum: {0}", a + b);
+	}
+
+	// type of parameter
+	public void Add(int a, float b)
+	{
+		Console.WriteLine("sum: {0}", a + b);
+	}
+	
+	// number of parameters
+	public void Add(int a, int b, int c)
+	{
+		Console.WriteLine("sum: {0}", a + b + c);
+	}
+
+	// kind of parameter 
+	public void Add(int a, int b, out int c)
+	{
+		c = a + b;
+		Console.WriteLine("sum: {0}", c);
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------
