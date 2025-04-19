@@ -1,0 +1,236 @@
+# Interface 
+
+- created using interface keyword
+- usually I is used as prefix for naming interfaces 
+
+- like classes interface also contain properties, methods, deleagates or events
+
+-----------------------------------------------------------------------------------------------------------------
+
+- cannot contain fields 
+	e.g 
+		- public string name; // COMPILE TIME ERROR - NOT ALLOWED
+		- public string Name { get; set; } // valid - since it is a property 
+
+- interface members are public by default 
+- there implementation in derived class also has to be public 
+- no explicit access modifiers are allowed for members 
+
+- members only contain declarations and not implementation
+- providing implementation for interface members gives compile time error
+
+- u can have extra methods in the derived class whose definition is not present in interface 
+- they can only be invoked using derived class object and not interface reference variable 
+
+NOTE:
+
+This is completely valid in C# 8+, thanks to a feature called:
+
+🔧 Default Interface Methods
+Introduced in C# 8.0, this feature allows interfaces to:
+	
+	- Define default method implementations
+	- Use access modifiers (like public, private, etc.)
+	- Include static members (in later versions like C# 9+)
+
+
+🔍 Why Is This Allowed?
+
+Historically, interfaces in C# could only declare method signatures — no implementations. But that had some downsides:
+
+	- Adding a new method to a widely-used interface breaks all implementing classes.
+	- Refactoring interfaces in large codebases became risky.
+
+⚠️ Caveats
+
+	- Only supported from C# 8.0+
+	- Only works with .NET Core 3.0+, .NET 5+, not supported in full .NET Framework
+
+-----------------------------------------------------------------------------------------------------------------
+
+-Inheritace of interface: 
+
+	- if a class or struct inherits from an interface, it should provide implementation for all interface members
+	- otherwise u get compile time error 
+
+	- a class or struct can inherit from multiple interface at the same time 
+	- a class can not inherit from more than one class at the same time 
+
+	- interfaces can inherit from other interfaces
+	- a class that inherits from derived interface must provide implementation for all interface members in the entire  interface inheritance chain 
+
+-----------------------------------------------------------------------------------------------------------------
+
+NOTE:
+
+- can not create an instance of an interface
+- but an interface reference variable points to a derived class object 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+- Interface definition for newer release 
+
+public interface ISolution
+{
+    public string Name { get; set; }
+
+	// valid now in newer versions of c# to provide implementation of methods 
+    public void Print()
+    {
+        Console.WriteLine("inteface: print me");
+    }
+
+    public void Message()
+    {
+        Console.WriteLine("inteface: you are a beauty");
+    }
+}
+
+public class Solution : ISolution
+{
+    public string Name { get; set; }
+
+    public void Print()
+    {
+        Console.WriteLine("Class: print me");
+    }
+
+	// extra method with no definition in interface 
+	public void Baby()
+  	{
+    	Console.WriteLine("Class: baby me");
+  	}
+}
+
+
+ISolution obj = new Solution();
+obj.Print();
+obj.Message();
+
+// Output 
+Class: print me
+inteface: you are a beauty
+
+Solution solution = new Solution();
+solution.Print();
+
+// can only be invoked using class object and not interface reference variable as definition of method Baby is missing in interface
+
+solution.Baby();  
+
+// Output
+Class: print me
+Class: baby me 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+- traditional interface deinition
+
+// only contains definition
+// no access modifier 
+// no fields 
+
+public interface ITraditional
+{
+	string Name { get; set; }
+	void Print(string message);
+}
+
+public class Traditional : ITraditional 
+{
+	// will give compiler error if implementation not provided of interface members 
+	public string Name { get; set; } = string.Empty;
+
+	public void Print(string message) 
+	{ 
+		Console.Write(message);
+	}
+}
+
+ITraditional traditional = new Traditional();
+traditional.Print("Hello there");
+
+// Output
+Hello there
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Explicit interface implementation
+
+- if a class inherits from two or more interfaces and both interface have same method signature
+- to make the class implement both methods use explicit interface implementation
+
+- do not use access modifier when explicitly implementing an interface member with same name 
+- prefix with the interface name 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Default interface implementation
+
+- to make one of the interface method default if same method definition present in multiple interfaces 
+- then implement that method normally - using public access modifier and without interface name prefix
+- and other interface method explicitly - without using access modifier and using interface name as prefix 
+- this makes the default method to be accessible through class instance 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+public interface I1
+{
+    void Print();
+}
+
+public interface I2
+{
+    void Print();
+}
+
+public interface I3
+{
+    // default implementation
+    void Print();
+}
+
+public class Solve: I1, I2, I3
+{
+    void I1.Print()
+    {
+        Console.WriteLine("implements print method of I1");
+    }
+    void I2.Print()
+    {
+        Console.WriteLine("implements print method of I2");
+    }
+
+    public void Print()
+    {
+        Console.WriteLine("default implementation of method from i3");
+    }
+}
+
+Solve solve = new Solve();
+((I1)solve).Print();
+((I2)solve).Print();
+solve.Print();
+
+// OR
+
+I1 i1 = new Solve();
+i1.Print();
+
+I2 i2 = new Solve();
+i2.Print();
+
+I3 i3 = new Solve();
+i3.Print();
+
+// Output 
+implements print method of I1
+implements print method of I2
+default implementation of method from i3
+-----------------------------------------------------------------------------------------------------------------
