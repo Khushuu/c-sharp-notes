@@ -32,7 +32,7 @@ Class
 
 NOTE:
 
-- struct are sealed types 
+- struct are inherently sealed types - will not act as base for any struct 
 - a class or struct can not inherit from struct 
 
 - sealed keyword prevents a class from being inherited
@@ -61,3 +61,5 @@ public struct Student {
 		Console.WriteLine("this is a constructor");
 	}
 }
+
+-----------------------------------------------------------------------------------------------------------------
