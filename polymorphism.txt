@@ -1,0 +1,104 @@
+# Polymorphism
+
+- enables u invoke derived class methods using base class object using override keyword during runtime
+- in the base class the method is declared virtual using virtual keyword
+- in derived class use override keyword to override the same method 
+
+- the virtual keyword indicates the method can be overridden in any derived class
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Difference between override and new (Method overriding and Method hiding)
+
+- Both are used when a derived class defines a method with the same name as a method in the base class
+
+Override 
+- Overrides base class method
+- Base method marked virtual, abstract, or override
+- Polymorphic – base class references will use derived class method
+- When you want derived class to extend or customize base class behavior
+
+new 
+- Hides base class method
+- No special keyword in base class
+- Non-polymorphic – base class reference uses base method
+- When you want to completely replace or hide base logic, but not override it
+
+NOTE:
+
+Base base = new Derived();
+base.Print();
+
+Base class reference variable pointing to derived class object will invoke
+
+override: 	overridden method in derived class
+new:		hidden method in the base class
+
+-----------------------------------------------------------------------------------------------------------------
+e.g
+
+public class Polymorphism
+{
+    public void Main()
+    {
+
+        Employee[] employee = new Employee[3];
+        employee[0] = new Employee();
+        employee[1] = new FullTime();
+        employee[2] = new PartTime();
+
+        foreach (Employee emp in employee) {
+
+            emp.Print();
+        }
+    }
+}
+
+public class Employee
+{
+    public virtual void Print()
+    {
+        Console.WriteLine("Employee method");
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+public class  FullTime: Employee
+{
+    public override void Print()
+    {
+        Console.WriteLine("Full Time Employee method");
+    }
+}
+
+Employee employee = new FullTime();
+employee.Print();
+
+// Output 
+// since we are using override keyword in the derived class and virtual keyword in the base class
+// it will call the derived class method 
+// even when the derived class reference is assinged to base class variable
+
+Full Time Employee method
+
+-----------------------------------------------------------------------------------------------------------------
+
+public class PartTime : Employee
+{
+    public new void Print()
+    {
+        Console.WriteLine("Part Time Employee method");
+    }
+}
+
+Employee employee = new PartTime();
+employee.Print();
+
+// Output 
+// since we are using new keyword in the derived class 
+// it will still call the base class method 
+
+Employee method 
+
+-----------------------------------------------------------------------------------------------------------------

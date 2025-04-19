@@ -68,6 +68,7 @@ NOTE:
 	// output 
 	base class constructor
 	derived class constructor
+
 -----------------------------------------------------------------------------------------------------------------
 
 # Method Hiding 
@@ -88,3 +89,15 @@ public new void print() {} // derived class method - this hides base class metho
 Base b = new Derived(); // a base class objects refers to child class 
 // possible as b can be contained in Derived class
 // it has all the members that base has  
+
+b.Print(); // this will call the Print method of the base class
+
+-----------------------------------------------------------------------------------------------------------------
+
+NOTE: 
+- if u write a constructor with parameters in base class u will also have to define a constructor with 0 parameters
+- the default constructor won't be available anymore
+- method calls must be inside a method, constructor, or property, not directly inside a class body
+
+- derived class object is assigned to base class reference 
+Base b = new Derived(); // this is valid 
