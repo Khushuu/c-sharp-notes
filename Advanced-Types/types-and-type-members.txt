@@ -1,0 +1,34 @@
+
+c# has 5 different access modifiers
+
+- private
+- protected
+- internal
+- protected internal
+- public 
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Difference between Type and Type Members 
+
+types: 
+	- classes, structs, enums, interfaces, delegates
+	- can have all 5 access modifiers  
+
+type members: 
+	- fields, properties, constructors, methods [that reside in a type]
+	- can have only 2 access modifiers - public and internal 
+
+-----------------------------------------------------------------------------------------------------------------
+
+NOTE:
+	- u can create regions to organize ur code
+	- e.g
+
+		#region Properties 
+		public string Name {get; set;}
+		public string Branch {get; set;}
+		#endregion
+
+-----------------------------------------------------------------------------------------------------------------
+
