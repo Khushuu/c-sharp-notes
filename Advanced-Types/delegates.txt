@@ -1,0 +1,130 @@
+# Delegates 
+
+- reference type
+- it is a type safe function pointer - it holds reference(pointer) to a function
+
+- the signature of the delegate and the return type should match that of the function, the delegate points to 
+- else u will get compiler error 
+- that is y delegates are called type safe functions 
+
+- delegate is similar to a class 
+- u can create an instance of it and pass the name of function as the parameter to the delegate constructor 
+- the delegate will point to this function 
+
+- syntax of delegate is same as that of a method with just delegate keyword 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g: 
+
+public delegate void PrintDelegate(string message);
+
+public class Babe
+{
+
+    public void Main()
+    {
+        // instantiate an object of delegate by passing method name as parameter
+        PrintDelegate printDelegate = new PrintDelegate(Print);
+        printDelegate("hello love");
+    }
+
+    public static void Print(string message)
+    {
+        Console.WriteLine(message);
+    }
+}
+
+Babe babe = new Babe();
+babe.Main();
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+// practical usage - using different logic for some common task 
+
+public delegate bool EligibleForPromotionDelegate(CompanyEmployee employee);
+
+public class CompanyEmployee
+{
+
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Salary { get; set; } 
+    public int Experience { get; set; }
+
+    // pass delegate as parameter to invoke different methods
+
+    public static void PromoteEmployee(List<CompanyEmployee> employees, EligibleForPromotionDelegate IsEligibleForPromotion) 
+    {
+        foreach (CompanyEmployee employee in employees) { 
+            
+            // this logic to check if an employee is eligible or not for promotion can change
+            // use delegate to call different methods to check if an employee is eligible for promotion
+            // each method can have its own condition for promotion
+            if(IsEligibleForPromotion(employee))
+            {
+                Console.WriteLine("Promoted Employe: {0}", employee.Name);
+            }
+        }
+    }
+}
+
+public class Company 
+{
+    public static void Main() 
+    {
+        List<CompanyEmployee> employees =
+        [
+            new CompanyEmployee { Id = 1, Name = "whatever", Salary = 1000, Experience = 2 },
+            new CompanyEmployee { Id = 2, Name = "mary", Salary = 5000, Experience = 5 },
+            new CompanyEmployee { Id = 3, Name = "dot", Salary = 3000, Experience = 6 },
+            new CompanyEmployee { Id = 4, Name = "com", Salary = 10000, Experience = 8 },
+        ];
+
+		// call using different method logics 
+
+        Console.WriteLine("Promotion on the basis of salary: ");
+		CompanyEmployee.PromoteEmployee(employees, new EligibleForPromotionDelegate(PromoteBasedOnSalary));
+
+		Console.WriteLine("\nPromotion on the basis of experience: ");
+		CompanyEmployee.PromoteEmployee(employees, new EligibleForPromotionDelegate(PromoteBasedOnExperience));
+
+		Console.WriteLine("\nPromotion on the basis of salary and experience: ");
+		CompanyEmployee.PromoteEmployee(employees, new EligibleForPromotionDelegate(PromoteBasedOnSalaryAndExperience));
+
+		// using lambda expression 
+		CompanyEmployee.PromoteEmployee(employees, emp => emp.Salary >= 6);
+    }
+
+    public static bool PromoteBasedOnSalary(CompanyEmployee employee)
+    {
+        return employee.Salary >= 5000 ? true : false;
+    }
+    public static bool PromoteBasedOnExperience(CompanyEmployee employee)
+    {
+        return employee.Experience >= 5 ? true : false;
+    }
+
+    public static bool PromoteBasedOnSalaryAndExperience(CompanyEmployee employee)
+    {
+        return (employee.Experience >= 7 && employee.Salary >= 10000) ? true : false;
+    }
+}
+
+
+// Output 
+Promotion on the basis of salary:
+Promoted Employe: mary
+Promoted Employe: com
+
+Promotion on the basis of experience:
+Promoted Employe: mary
+Promoted Employe: dot
+Promoted Employe: com
+
+Promotion on the basis of salary and experience:
+Promoted Employe: com
+
+-----------------------------------------------------------------------------------------------------------------

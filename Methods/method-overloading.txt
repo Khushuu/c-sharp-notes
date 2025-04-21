@@ -20,6 +20,8 @@ Signature of a method consists of
 Signature of a method does not include 
 	- return type of the method
 	- params modifier
+	- The access modifier (public, private) 
+	- Attributes and default values of parameters
 
 NOTE: It is not possible to overload a method on the basis of return type or params modifier - throws error at compile time
 
