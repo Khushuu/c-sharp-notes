@@ -128,3 +128,93 @@ Promotion on the basis of salary and experience:
 Promoted Employe: com
 
 -----------------------------------------------------------------------------------------------------------------
+
+# Multicast Delegates 
+
+- a delegate that has references to more than one function
+- when a multicast delegate is invoked all the function the delegate is pointing to are invoked 
+
+2 Approaches to create multicast delegate 
+
++ or += to register a method with the delegate 
+- or -= to unregister a method with the delegate
+
+NOTE:
+- a multicast delegate invokes the method in the invocation list in the same order in which they are added
+
+- if the delegate has a return type other than void and it is a multicast delegate then 
+- only the value of the last invoked method will be returned
+- if the delegate has out parameter, then value of the output parameter will be value assigned to it by last invoked method
+
+Where to use multicast delegates
+
+- Observer design pattern also called publish / subscriber pattern
+- make use of observer design pattern very simple 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+// multicast delegates
+public delegate void PrintMeDelegate();
+public delegate void SingleDelegate();
+
+public class Baba
+{
+
+    public static void Main()
+    {
+        // using + and multiple instances of delegates 
+        PrintMeDelegate d1, d2, d3, d4;
+
+        d1 = new PrintMeDelegate(PrintMe1);
+        d2 = new PrintMeDelegate(PrintMe2);
+        d3 = new PrintMeDelegate(PrintMe3);
+
+        d4 = d1 + d2 + d3;
+        d4();
+
+        Console.WriteLine();
+
+        d4 -= d1;
+        d4();
+
+        Console.WriteLine();
+
+        // using methods and single instance
+        SingleDelegate s1 = new SingleDelegate(PrintMe1);
+        s1 += PrintMe2;
+        s1 += PrintMe3;
+        s1 -= PrintMe2;
+
+        s1();
+    }
+
+    public static void PrintMe1()
+    {
+        Console.WriteLine("Print Me 1");
+    }
+    public static void PrintMe2()
+    {
+        Console.WriteLine("Print Me 2");
+    }
+    public static void PrintMe3()
+    {
+        Console.WriteLine("Print Me 3");
+    }
+
+}
+
+// Output 
+
+Print Me 1
+Print Me 2
+Print Me 3
+
+Print Me 2
+Print Me 3
+
+Print Me 1
+Print Me 3
+
+-----------------------------------------------------------------------------------------------------------------
