@@ -1,0 +1,98 @@
+# Enums
+
+- enums are enumerations
+- enums are value types
+- enums are strongly typed constants 
+- the default underlying type of an enum is int
+- the default value of first element is 0 and gets incremented by 1
+- it is possible to customize the underlying types and values
+- if a program uses set of integral numbers, consider replacing them with enums
+- otherwise the program becomes less readable and maintainable 
+
+- enums are strongly typed constants - an explicit cast is needed to convert from enum type to integral type and vice versa 
+- enum of one type can not be implicitly assigned to an enum of another type even though the underlying value of their members are the same 
+
+- enum keyword is used to create enumeration: public enum Gender 
+- where as Enum class contains static GetValues() and GetNames() method which can be used to list Enum underlying type values and names
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+internal class Enums
+{
+	public static void Main()
+	{
+		Cust[] cust =
+		{
+			new Cust() { Name = "avory", Gender = Gender.Female },
+			new Cust() { Name = "derek", Gender = Gender.Male },
+			new Cust() { Name = "bryan", Gender = Gender.Unknown }
+		};
+
+		foreach (Cust c in cust) { 
+			Console.WriteLine("Name: {0} and Gender: {1}", c.Name, c.Gender);
+		}
+
+		// strongly types constant - do explict type casting
+		Gender g = (Gender)1;
+		int num = (int)Gender.Unknown;
+
+		Console.WriteLine("g: {0}, num: {1}", g, num);
+
+		// Enum class - GetType and GetValues method to get data
+		string[] directions = Enum.GetNames(typeof(Direction));
+
+		foreach (string direction in directions) {
+			Console.WriteLine("Direction: {0}", direction);
+		}
+
+		byte[] values = (byte[])Enum.GetValues(typeof(Direction));
+		foreach (byte value in values)
+		{
+			Console.WriteLine("Value: {0}", value);
+		}
+	}
+}
+
+// change underlying type from int to byte
+public enum Direction: byte
+{
+	North = 4, 
+	South = 8, 
+	West = 16,  
+	East = 32
+}
+
+public enum Gender
+{
+	Male, 
+	Female,
+	Unknown
+}
+
+public class Cust
+{
+	public string Name { get; set; }
+	public Gender Gender { get; set; }
+}
+
+// Output 
+
+Name: avory and Gender: Female
+Name: derek and Gender: Male
+Name: bryan and Gender: Unknown
+
+g: Female, num: 2
+
+Direction: North
+Direction: South
+Direction: West
+Direction: East
+
+Value: 4
+Value: 8
+Value: 16
+Value: 32
+
+-----------------------------------------------------------------------------------------------------------------
