@@ -1,0 +1,144 @@
+# Exception Handling 
+
+- an exception is an unforeseen error that occuring during runtime 
+- an exception is an object that derives from System.Exception class
+- System.Exception has various useful properties that provide valuable info about the exception
+	- Message: gets the message that describes the current exception 
+	- Stack Trace: provides the stack to the line number in the method where the exception occured 
+
+- Specific class exceptions will be caught before the base general exceptions 
+- hence specific exception blocks should always be on top of the base exception block 
+- otherwise u will get a compiler error 
+
+Examples 
+
+- when reading a file that does not exist: throws FileNotFoundException
+- when reading from a database table that does not exist: throws SqlException
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Releasing System Resources 
+
+- We use try, catch and finally blocks for exception handling
+
+try: code that can possibly cause an exception will be in this block
+catch: handles the exception 
+finally: clean and free the resources that class was holding onto during the program execution. it is optional.
+
+NOTE:
+
+- it is a good practice to always release resources in the finally block 
+- as finally block is guaranteed to execute irrespective of whether there is an exception or not
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+internal class ExceptionHandling
+{
+    public static void Main()
+    {
+
+        StreamReader streamReader = null;
+        try
+        {
+            streamReader = new StreamReader(@"c:/this/is/not/valid/path");
+            Console.WriteLine(streamReader.ReadToEnd());
+        }
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine("The file {0} is not found at provided path", ex.FileName);
+        }
+        catch (Exception ex) { 
+            
+            // generic exception
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            // release resources
+            streamReader?.Close();
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------
+
+# Inner Exception
+
+- InnerException property returns the Exception instance that caused the current exception 
+
+- to retainthe original exception pass it as a parameter to the constructor of the current exception
+- always check if the inner exception is not null before acecssing any property of the inner exception object
+- otherwise u may get null reference exception 
+- to get the type of InnerException use GetType() method 
+
+-----------------------------------------------------------------------------------------------------------------
+
+e.g 
+
+public static void Main()
+{
+	try
+	{
+		try
+		{
+			Console.WriteLine("Enter first number: ");
+			int a = Convert.ToInt32(Console.ReadLine());
+
+			Console.WriteLine("Enter second number: ");
+			int b = Convert.ToInt32(Console.ReadLine());
+
+			Console.WriteLine("Division result: {0}", a / b);
+		}
+		catch (Exception ex)
+		{
+			// log exception
+			string path = @"C:\Users\kvashish\Downloads\SampleFiles\LogFile.txt";
+			if (File.Exists(path))
+			{
+				StreamWriter streamWriter = new StreamWriter(path);
+				streamWriter.WriteLine(ex.GetType().Name);
+				streamWriter.WriteLine("Message: ");
+				streamWriter.WriteLine(ex.Message);
+
+				streamWriter.Close();
+
+				// output message to user
+				Console.WriteLine("An excpetion occured. Please try again.");
+			}
+			else
+			{
+				throw new FileNotFoundException(path + " is not present", ex);
+			}
+		}
+	}
+	catch (Exception ex) 
+	{
+		Console.WriteLine("Current Exception: {0}", ex.GetType().Name);
+		if(ex.InnerException != null)
+			Console.WriteLine("Inner Exception: {0}", ex.InnerException.GetType().Name);
+	}
+}
+
+-----------------------------------------------------------------------------------------------------------------
+# Custom Exceptions 
+
+- create custom exceptions when none of the already existing dotnet exception correctly describe the problem
+
+- create a class that inherits from System.Exception class
+- as per naming convention end the name of the class with Exception suffix 
+
+- provide public constructor that takes in a string parameter 
+- this constructor simply passes the string as a parameter to the base exception class constructor
+
+- if u want Exception class object to work across application domains then the object must be serializable
+- to make the excpetion class serializable mark it with [Serializable] attribute 
+- and provide a constructor that invokes the base Exception class constructor with SerializationInfo and StreamingContext as object parameters 
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
