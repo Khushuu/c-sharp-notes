@@ -1,0 +1,53 @@
+# Access Modifiers
+
+# 5 types of access modifier in c#
+
+- private
+- public 
+- protected
+- internal
+- protected internal
+
+-------------------------------------------------------------------------------------------------------
+
+# Type members - all 5 access modifiers can be used
+# Types - only internal and public access modifiers can be used 
+
+- compile time error on using private, protected and protected internal with types
+
+-------------------------------------------------------------------------------------------------------
+
+# Accessibility 
+
+- private: 				only within containing class 				[default for type members]
+- public: 				used anywhere, no restriction
+- protected: 			within containing types and the types derived from containing type
+
+- internal: 			anywhere within the containing assembly		[default for types]
+
+- protected internal: 	anywhere within the containing assembly and 
+						from within the a derived class in another assembly
+
+-------------------------------------------------------------------------------------------------------
+
+# Assembly
+
+-- An assembly is a compiled output of your C# code — it’s either:
+	-- A .dll (class library) or
+	-- An .exe (executable)
+
+Example:
+
+-- You have a project Library.dll and a project App.exe.
+-- If a class is marked internal in Library.dll, it can only be used inside Library.dll.
+-- App.exe cannot access it, even if it references the DLL.
+
+-------------------------------------------------------------------------------------------------------
+
+NOTE: A namespace does not determine the assembly — what matters is the project.
+
+-- If you use the same namespace in different projects
+-- each project still compiles into its own assembly (i.e., .dll or .exe)
+-- even if they share the same namespace
+
+NOTE: internal members won't be visible across assemblies even if namespaces match.
