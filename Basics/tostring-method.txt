@@ -1,0 +1,24 @@
+# Difference between Convert.ToString() and ToString() method 
+
+-- Convert.ToString() handles null values
+-- ToString() does not and throws nulll refernece exception
+
+-------------------------------------------------------------------------------------------------------
+
+// output
+// C_Sharp_Playground.Customer
+//C_Sharp_Playground.Customer
+
+Customer c = new Customer();
+Console.WriteLine(c.ToString());
+Console.WriteLine(Convert.ToString(c));
+
+-------------------------------------------------------------------------------------------------------
+
+// output
+// empty string
+// error: null reference exception
+
+Customer c2 = null;
+Console.WriteLine(Convert.ToString(c2));
+Console.WriteLine(c2.ToString()); // throws error
