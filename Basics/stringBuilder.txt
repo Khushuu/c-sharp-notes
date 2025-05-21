@@ -1,0 +1,51 @@
+# Difference between System.String and StringBuilder 
+
+-- for both string and stringBuilder object gets created in the heap
+-- the reference of the object is stored in the stack 
+
+----------------------------------------------------------------------------------------------------------------
+
+# System.String
+
+-- it is immutable
+-- another new string objects gets created every time the string is modified
+-- and the reference variable points to the new object 
+-- the old objects remain in memory until the garbage collector runs 
+-- present in System namespace
+
+----------------------------------------------------------------------------------------------------------------
+
+# StringBuilder
+
+-- it is mutable
+-- same object on the heap is modified instead of creating a new one 
+-- in case of heavy string manipulation StringBuilder perform better than System.String
+-- present in System.Text namespace
+
+----------------------------------------------------------------------------------------------------------------
+
+# String 
+
+// ouput 
+// Who let the dogs out
+
+string message = "Who ";
+message += "let ";
+message += "the ";
+message += "dogs ";
+message += "out ";
+Console.WriteLine(message);
+
+----------------------------------------------------------------------------------------------------------------
+
+# StringBuilder
+
+// ouput 
+// Who let the dogs out
+
+StringBuilder s = new StringBuilder("Who ");
+s.Append("let ");
+s.Append("the ");   
+s.Append("dogs ");
+s.Append("out ");
+Console.WriteLine(s);
