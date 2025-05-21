@@ -1,0 +1,67 @@
+# Partial Methods
+
+- a partial class or a struct can contain partial methods
+- a partial metho must be declared within a partial class of partial struct 
+- non-partial class or struct can not include partial methods 
+
+- a partial method is created using partial keyword
+
+- a partial method declaration consists of two parts
+	- the definition: only the method signature
+	- the implementation 
+	- these maybe in seperate parts of a partial class or in the same partial class
+	- but signature and implementation should always be seperate and not like regular methods
+
+- signature of the partial method declaration must match with the signature of the implementation
+
+- implementation of a partial method is optional
+	- if implementation is not provided then the compiler removes the signature
+	- and all calls to the method
+
+- partial methods can not have access modifiers or virtual, abstract, override, new, sealed, or extern modifiers
+- partial methods are private by default
+- partial methods return type must be void
+- partial methods can be implemented only once
+
+- it is a compile time error:
+	- to include any access modifier including private
+	- to include declaration and implementation at the same time for a partial method
+	- to have any other return type other than void
+	- to implement a partial method more than once 
+
+NOTE: partial methods do not have any return type other than void, so that even if the implementation of partial method is not provided it will not break the code 
+
+----------------------------------------------------------------------------------------------------------------
+
+internal class PartialClass
+{
+    public static void Hott() { 
+        
+        Hot hot = new();
+        hot.CallNameHottie();
+    }
+}
+
+public partial class Hot
+{
+	// partial method does not have any access modifiers
+	partial void NameHottie();
+
+	public void CallNameHottie()
+	{
+		NameHottie();
+	}
+}
+
+public partial class Hot
+{
+	// partial method implementation
+	partial void NameHottie()
+	{
+		Console.WriteLine("I am hot");
+	}
+}
+
+// output
+// I am hot
+PartialClass.Hott();

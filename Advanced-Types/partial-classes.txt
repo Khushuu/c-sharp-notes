@@ -1,0 +1,76 @@
+# Partial Classes 
+
+-- allows to split a class into 2 or more files
+-- at the time of compilation, all the parts are combined into single class
+-- any member that are declared in the partial definition are available to all other parts of the partial class
+
+-- partial keyword can be used to split a struct or an interface over 2 or more files
+
+--------------------------------------------------------------------------------------------------------------
+
+# Advantages of partial class
+
+- used to seperate automatically generated system code from developer's code
+
+- webform1.aspx.cs - contains developers code
+- webform1.aspx.designer.cs - contains system code 
+
+--------------------------------------------------------------------------------------------------------------
+
+# Rules for creating partial classes 
+
+-- all parts spread across different files 
+	-- must use partial keyword
+	-- must have same access modifiers 
+
+-- if any parts 
+	- are declared: 
+		- abstract: then entire type is considered abstract
+		- sealed: then entire type is considere sealed
+	
+	- inherits a class:
+		- then entire type inherits that class
+
+-- C# does not support multiple class inheritance
+-- differnt parts of the partial class must not specify different base classes
+
+-- C# supports multiple interface inheritance
+-- different parts of the partial class can specify different base interfaces
+-- final type implements all of the interfaces listed by all of the partial declarations
+
+--------------------------------------------------------------------------------------------------------------
+
+internal class PartialClass
+{
+	public static void Man()
+	{
+		SuperMan superMan = new("Clark", "Kent");
+		Console.WriteLine(superMan.GetName());
+	}
+}
+
+public partial class SuperMan
+{
+	public string FirstName { get; set; } = firstName;
+}
+
+public partial class SuperMan(string firstName, string lastName)
+{
+	public string LastName { get; set; } = lastName;
+
+	public string GetName()
+	{
+		return FirstName + " " + LastName;
+	}
+}
+
+
+// output
+// Clark Kent
+
+PartialClass.Man();
+
+
+
+
+
