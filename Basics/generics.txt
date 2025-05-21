@@ -1,0 +1,47 @@
+# Generics
+
+-- allows to design classes and methods decoupled from data types
+-- extensively used by collection classes available in System.Collections.Generic namespace
+
+-- every type in .net directly or indirectly inherits from System.Object type
+
+-- AreEqual method can be made reusable by using object type parameters
+-- AreEqual method is no longer type safe - u can pass different data types for comparison 
+-- but performance degrades due to boxing and unboxing 
+
+-- boxing: 		converting value type to reference type 
+-- unboxing: 	converting reference type to value type 
+
+-- interfaces, classes, methods, delegates all can be made generic
+-- u can use any name u want instead of using T - but naming convention is to use T
+
+-----------------------------------------------------------------------------------------------------------
+
+# make method generic
+
+-- to make AreEqual() method generic - specify a type parameter using angular brackets
+
+public static bool AreEqual<T>(T a, T b)
+
+-- to call the generic method specify the type after method name 
+
+AreEqual<int>(1, 3)
+AreEqual<string>("hello", "world")
+
+-----------------------------------------------------------------------------------------------------------
+
+Generics.Compare();
+
+internal class Generics
+{
+	public static void Compare()
+	{
+		Console.WriteLine(AreEqual<int>(1, 3));
+		Console.Write(AreEqual<string>("hello", "world"));
+	}
+
+	public static bool AreEqual<T>(T a, T b)
+	{
+		return a.Equals(b);
+	}
+}

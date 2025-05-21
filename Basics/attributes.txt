@@ -1,0 +1,46 @@
+# Attributes
+
+-- allows to add declarative information about the program
+-- this info can be queried at runtime using reflection
+
+-- there are several pre-defined attributes provided by .net
+-- it is also possible to create custom attributes
+
+-----------------------------------------------------------------------------------------------------------
+
+# Pre-defined attributes
+
+-- Obsolete: 	marks type and type members outdated
+-- WebMethod: 	to expose a method as an XML web service method
+-- Serialize:	indicates that a class can be serialized
+
+-----------------------------------------------------------------------------------------------------------
+
+-- it is possible to customize attributes using parameters
+-- an attribute is a class that inherits from System.Attribute base class
+
+-----------------------------------------------------------------------------------------------------------
+
+Code:
+
+int sum = Attributes.Add(1, 2);
+Console.WriteLine(sum);
+
+internal class Attributes
+{
+	[Obsolete("use Add(List<int> nums)")]
+	public static int Add(int a, int b)
+	{
+		return a + b;
+	}
+
+	public static int Add(List<int> nums)
+	{
+		int sum = 0;
+		foreach (int num in nums) {
+			sum += num;
+		}
+
+		return sum;
+	}
+}
