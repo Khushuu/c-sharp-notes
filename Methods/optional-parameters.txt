@@ -1,0 +1,65 @@
+# Optional Parameters
+
+# 4 methods to make parameters optional 
+
+-- Use parameters array
+-- Method overloading
+-- Specifying parameter defaults
+-- Use optionalAttribute present in System.Runtime.InteropServices namespace
+
+---------------------------------------------------------------------------------------------------------------
+
+# Using parameter array
+
+-- use params keyword for the array 
+-- params parameter must be the last parameter in the list of parameters passed in the method
+-- otherwise compile time error is thrown
+
+e.g 
+	Add(4, 5, 6, 7, 8); // calls params method
+ 	Add(2, 3, new int[] { 10, 10, 20 }); // calls params method
+
+	public static void Add(int a, int b, params int[] nums)
+---------------------------------------------------------------------------------------------------------------
+
+# Using method overloading
+
+-- provide overloaded methods that then call existing functions with different parameter value 
+
+e.g
+	Add(4, 5); // calls overlaoded method
+
+	// using method overloading
+	public static void Add(int a, int b)
+	{
+    		Add(a, b, []);
+	}
+
+---------------------------------------------------------------------------------------------------------------
+
+# Specifying parameter defaults
+
+-- specify default value for the optional parameter
+-- optional parameter must appear after all required parameters 
+
+** Named parameters
+	-- in case there are multiple optional parameters
+	-- specify the name of the parameter when calling the method along with the value 
+	
+e.g	
+	Add(7, 8, 9); // calls method with default values
+	Add(11, 11, 11, d: 600); // named parameters 
+
+	public static void Add(int a, int b, int r, int c = 100, int d = 200)
+
+---------------------------------------------------------------------------------------------------------------
+
+# Using Optional Attribute 
+
+-- pass [Optional] before the parameter in the method signature
+
+e.g:
+
+	Subtract(b: 3, r: 4, k: 6);
+
+	public static void Subtract([Optional]int a, int b, int r, [Optional] int j, int k)

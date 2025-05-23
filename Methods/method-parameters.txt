@@ -89,6 +89,12 @@ Console.WriteLine("Sum: {0}, Subtract: {1}, Product: {2}, Division: {3}", sum, s
 	- If no arguments are passed, the parameter array is just an empty array
 	- Behind the scenes, it’s just a regular array
 
+	- params must be a single-dimensional array — not a generic type like List<T>
+
+Why Not List<int>?
+
+Because params lets the caller pass a variable number of arguments directly, and C# doesn't know how to implicitly convert a list of arguments into a List<int> — only into an int[].
+
 e.g:
 
 public void PrintNumbers(params int[] numbers)
