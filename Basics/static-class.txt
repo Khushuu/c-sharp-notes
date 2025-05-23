@@ -1,0 +1,41 @@
+# Static class
+
+-- Cannot be instantiated
+-- Can only contain static members (methods, fields, properties, etc.)
+-- Is often used to group utility or helper methods
+
+------------------------------------------------------------------------------------------------------------
+
+# Rules of static class 
+
+1. Cannot be instantiated:
+
+var helper = new MathHelper(); // ❌ Compile-time error
+
+2. Cannot contain instance constructors or instance members:
+
+public static class MyClass
+{
+    public int Value; // ❌ Not allowed
+    public void DoSomething() { } // ❌ Not allowed
+}
+
+3. Can have a static constructor:
+
+static MyClass()
+{
+    // Initialize static members
+}
+
+------------------------------------------------------------------------------------------------------------
+
+public static class MathHelper
+{
+    public static int Add(int a, int b)
+    {
+        return a + b;
+    }
+}
+
+int sum = MathHelper.Add(3, 5);  // No need to create an instance
+

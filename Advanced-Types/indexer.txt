@@ -1,0 +1,93 @@
+# Indexers
+
+-- allows instances of a class to be indexed just like arrays
+
+-- use "this" keyword to create an indexer
+-- just like properties indexers have get and set accessors
+-- indexers can also be overloaded 
+
+------------------------------------------------------------------------------------------------------------
+
+# Overloading Indexers
+
+-- indexers are overloaded on the basis of number and type of parameters
+
+------------------------------------------------------------------------------------------------------------
+
+CODE:
+
+internal class Indexers
+{
+
+    public static void UseMe()
+    {
+        CompanyWorker companyWorker = new CompanyWorker();
+
+        Console.WriteLine(companyWorker[1]); // John
+        Console.WriteLine(companyWorker[2]); // Jane
+
+        // set name for id 1
+        companyWorker[1] = "John Doe";
+        Console.WriteLine(companyWorker[1]); // John Doe
+
+        // get salary for name David
+        Console.WriteLine(companyWorker["David"]); // 3000
+
+        // set salary for David
+        companyWorker["David"] = 4000;
+        Console.WriteLine(companyWorker["David"]); // 3000
+    }
+
+}
+
+public class Worker
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Salary { get; set; }
+}
+
+public class CompanyWorker
+{
+    public List<Worker> Workers;
+
+    public CompanyWorker()
+    {
+        Workers = new List<Worker>
+        {
+            new Worker { Id = 1, Name = "John", Salary = 1000 },
+            new Worker { Id = 2, Name = "Jane", Salary = 2000 },
+            new Worker { Id = 3, Name = "David", Salary = 3000 }
+        };
+    }
+
+    // indexer
+    // on id to get name and set name 
+    public string this[int id]
+    {
+        get
+        {
+          return Workers.FirstOrDefault(w => w.Id == id)?.Name ?? "Not Found";
+        }
+
+        set
+        {
+            Workers.FirstOrDefault(w => w.Id == id).Name = value;
+        }
+    }
+
+    // indexer - overload
+    // on name to get salary and set salary
+
+    public int this[string name]
+    {
+        get
+        {
+            return Workers.FirstOrDefault(w => w.Name == name)?.Salary ?? 0;
+        }
+        set
+        {
+            Workers.FirstOrDefault(w => w.Name == name).Salary = value;
+        }
+    }
+}
