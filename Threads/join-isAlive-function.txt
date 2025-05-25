@@ -1,0 +1,49 @@
+# Significance of Thread.Join and Thread.IsAlive functions
+
+# Join:
+
+-- blocks the current thread
+-- makes it wait until the thread on which Join method is invoked compeletes 
+-- has an overload where we can specify the timeout
+-- if the timeout is not specified calling thread waits until the thread on which Join is invoked completes
+
+-- useful when we need to wait and collect result from a thread execution
+-- or if some clean up has to be done after the thread has completed 
+
+e.g:
+-- on calling T1.Join(): main thread will wait until the execution of thread 1 is completed 
+
+	Thread T1 = new Thread(Program.Thread1Function);
+	T1.Start();
+
+	Thread T2 = new Thread(Program.Thread2Function);
+	T2.Start();
+
+	T1.Join();
+	Console.WriteLine("Thread 1 execution completed.");
+
+	T2.Join();
+	Console.WriteLine("Thread 2 execution completed.");
+
+	Console.WriteLine("Main thread execution completed.");
+
+--------------------------------------------------------------------------------------------------------
+
+# Join(int millisecondsTimeout):
+	-- returns boolean value
+	-- returns true is the thread has terminated otherwise false
+	-- for what time the main thread should wait for the execution of the current thread
+	-- if the thread does not return in specified time the main thread continues execution of next line
+
+e.g:
+	if(T1.Join(1000)) {}
+
+--------------------------------------------------------------------------------------------------------
+
+# IsAlive: property
+	-- returns boolean value
+	-- returns true if the thread is still executing otherwise false
+
+e.g:
+	if(T1.IsAlive()) {}
+
