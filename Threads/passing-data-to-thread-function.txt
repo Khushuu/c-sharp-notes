@@ -1,0 +1,43 @@
+# Passing data to Thread function in a type safe manner 
+
+-- instead of passing parameter to the Thread.Start(target) function to execute the function
+-- pass it to the constructor of the class which has the function to be executed 
+-- so when an instance of the class is created we provide the parameter 
+
+-- this can only be done if the method to be executed is non-static
+-- as only for non-static method an instance is created and only then the constructor will be called
+-- for a static method the constructor is called only once 
+
+-- then use ThreadStart delegate instead of ParametrizedThreadStart delegate to execute the function
+
+--------------------------------------------------------------------------------------------------------
+
+e.g:
+	class Number {
+	
+		int _target;
+		
+		// constructor
+		public Number(int target) {
+			this._target = target;
+		}
+		
+		public void PrintNumbers() {
+			
+			for(int i = 1; i <= _target; i++) {}
+		}
+	}
+
+	Main method
+
+	int target = Convert.ToInt32(Console.ReadLine()); // readline returns a string - convert it to int
+	
+	Number number = new Number(target);
+	Thread T1 = new Thread(new ThreadStart(number.PrintNumbers));
+	T1.Start();
+
+	or
+	
+	// implicit conversion by compiler to ThreadStart delegate
+	Thread T1 = new Thread(number.PrintNumbers);
+	T1.Start();

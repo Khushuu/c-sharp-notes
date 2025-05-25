@@ -1,0 +1,54 @@
+# ThreadStart Delegate 
+
+# To create a thread
+	-- create an instance of the Thread class
+	-- to its constructor pass the name of the function that the thread should execute
+
+e.g:
+	Thread T1 = new Thread(Number.PrintNumbers);
+	T1.Start();
+
+-----------------------------------------------------------------------------------------------------------
+
+# ThreadStart delegate
+	-- purpose of creating a thread is to execute a function
+	-- a delegate is a type safe function pointer
+	-- meaning it points to a function that the thread has to execute 
+	-- all threads require an entry point to start execution
+	-- threads always require a delegate
+	-- the framework will automatically create a delegate in the overload function
+	-- that just takes function name as argument
+
+-- Thread class constructor also takes a ThreadStart delegate as an argument
+
+e.g:
+	Thread T1 = new Thread(new ThreadStart(Number.PrintNumbers));
+	T1.Start();
+
+-----------------------------------------------------------------------------------------------------------
+
+-- Using delegate keyword
+
+e.g:
+	Thread T1 = new Thread(delegate() { Number.PrintNumbers(); });
+
+-----------------------------------------------------------------------------------------------------------
+
+-- Using lambda expression
+
+e.g
+	Thread T1 = new Thread(() => Number.PrintNumbers());
+
+-----------------------------------------------------------------------------------------------------------
+
+NOTE:
+	-- thread function need not be static function always
+	-- it can also be non-static function
+	-- in case of non-static function we need to create an instance of the class for calling the method
+
+e.g:
+	Number number = new Number();
+	Thread T1 = new Thread(number.PrintNumbers);
+	T1.Start();
+
+	

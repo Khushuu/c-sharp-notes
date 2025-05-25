@@ -1,0 +1,52 @@
+# ParameterizedThreadStart Delegate 
+
+-- use ParametrizedThread delegate to pass data to the thread function
+-- use ThreadStart delegate if there is no data to be passed in the function
+-- ParametrizedThread delegate accepts a single parameter of type object 
+
+-----------------------------------------------------------------------------------------------------------
+
+# Start() method in Thread class also has two overloaded methods 
+	-- one that takes no parameter
+	-- other one that takes single parameter of type object 
+
+--------------------------------------------------------------------------------------------------------
+
+# Using ParametrizedThreadStart delegate to pass parameter
+
+e.g:
+
+	public static void PrintNumbers(object target) {} // a function that takes parameter
+	
+	object target = 10;
+
+	ParametrizedThreadStart pts = new ParametrizedThreadStart(Number.PrintNumbers);
+	Thread T1 = new Thread(pts);
+	T1.Start(target);
+
+--------------------------------------------------------------------------------------------------------
+
+# Without using delegate 
+
+-- an instance of ParametrizedThreadStart delegate is not explicitly created
+-- the compiler implicitly converts 
+
+==> new Thred(Number.PrintNumbers) to
+==> new Thead(new ParametrizedThreadStart(Number.PrintNumbers));
+
+e.g
+	object target = Console.ReadLine();
+	
+	Thread T1 = new Thread(Number.PrintNumbers);
+	T1.Start(target);
+
+--------------------------------------------------------------------------------------------------------
+
+# NOTE:
+	-- using ParametrizedThreadStart delegate and Thread.Start(object) method to pass data to Thread function 
+	-- is not type safe as they operate on object datatype and any type can be passed 
+	-- and the signature of the passed function should match that of ParametrizedThreadStart delegate
+	-- which means the function accepts a single parameter of object type
+	-- otherwise u get compiler error
+
+--------------------------------------------------------------------------------------------------------
