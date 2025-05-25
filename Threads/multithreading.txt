@@ -52,5 +52,57 @@ e.g:
 
 # NOTE: only use multithreading when the advantages of doing so outweighs the disadvantages 
 
+-----------------------------------------------------------------------------------------------------------
+
+# Performance implication of a multithreaded program
+
+# On a machine that has multiple processors:
+
+-- multiple threads can execute application code in parallel on different cores
+
+e.g:
+
+-- if there are 2 thread and 2 cores
+-- each thread would run on individual core 
+-- this means performance is better 
+
+-- if two threads take 10 milli-second each to complete
+-- then on machine with 2 processor - total time taken to execute is 10 milli-seconds
+
+------------------------------------------------------------------------------------------------------
+
+# On a machine that has a single processor
+
+-- multiple threads execute one after the other or wait until one thread finishes
+-- it is not possible for a single processor system to execute multiple threads in paralled
+-- since the operating system switches between the threads so fast
+-- it just gives us the illusion that threads run in parallel
+
+-- on a single core/processor machine - multiple threads can affect performance negatively
+-- as there is overhead involved with context switching
+
+e.g:
+
+-- if two threads take 10mill-seconds each to complete
+-- then on machine with 1 processor the total time taken is: 
+	==> 20 milli-seconds + (thread context switching time, if any) 
+
+------------------------------------------------------------------------------------------------------
+
+e.g
+
+- use two threads for two seperate functions - check time elapsed
+-- do not use thread for the functions - check time elapsed
+
+-- in multi processor sytem time taken by threads will always be less than no thread solution 
+
+
+
+
+
+
+
+
+
 
 

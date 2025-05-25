@@ -1,0 +1,24 @@
+# Anonymous method
+
+-- is a method without a name
+-- provide us a way of creating delegate instances without having to write a seperate method
+
+-----------------------------------------------------------------------------------------------------------
+
+# Lambda expression 
+
+-- lamda operator: => 
+-- read => as goes to
+
+-- no need to specify input parameter type explicitly
+-- helpful for writing LINQ query expressions
+-- more convenient to use than anonymous methods 
+
+-----------------------------------------------------------------------------------------------------------
+
+e.g:
+	Customer cc = listCustomer.Find(c => c.id == 100);
+
+-- input type can be explicitly specified - not required
+	
+	Customer cc = listCustomer.Find((Customer c) => c.id == 100);
