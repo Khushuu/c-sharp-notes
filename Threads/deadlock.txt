@@ -1,0 +1,23 @@
+# Deadlocks
+
+# When can a deadlock occur
+
+-- suppose we have 2 threads --> Thread1 and Thread2
+-- and 2 resources --> Resource1 and Resource2
+
+-- Thread1 has already acquired a lock on Resource1 and want to acquire lock on Resource2
+-- Thread1 has already acquired a lock on Resource2 and want to acquire lock on Resource1
+
+-- Two threads never give up their locks, hence deadlock 
+
+---------------------------------------------------------------------------------------------------------------
+
+# Resolving a deadlock in multithreaded program
+
+Different techniques to avoid and resolve deadlocks
+
+-- Acquiring locks in specific defined order
+-- Mutex class
+-- Monitor.TryEnter() method 
+
+
