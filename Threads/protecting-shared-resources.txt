@@ -1,0 +1,100 @@
+# Protecting shared resources from concurrent access in multithreading
+
+# What happens if shared resources are not protected from concurrent access in multithreaded program
+
+-- the output or behaviour of the program can become inconsistent
+
+
+e.g:
+
+-- Main thread: Output = 3Million
+
+	static int Total = 0;
+
+	public static void Main() {
+
+		AddOneMillion();
+		AddOneMillion();
+		AddOneMillion();
+
+		Console.WriteLine("Total = {0}", Total);
+
+	}
+
+	public static void AddOneMilion() {
+
+		for(int i = 1; i <= 100000000; i++) {
+			Total++;
+		}
+	}
+
+-----------------------------------------------------------------------------------------------------
+
+-- MultiThreading - 3 threads
+-- Output --> u might always get different number and not 3Million always
+
+	static int Total = 0;
+
+	public static void Main() {
+
+		Thread T1 = new Thread(Program.AddOneMillion);
+		Thread T2 = new Thread(Program.AddOneMillion);
+		Thread T3 = new Thread(Program.AddOneMillion);	
+		
+		T1.Start(); 
+		T2.Start(); 
+		T3.Start();		
+		
+		T1.Join(); 
+		T2.Join(); 
+		T3.Join();	
+
+		Console.WriteLine("Total = {0}", Total);
+
+	}
+
+	public static void AddOneMilion() {
+
+		for(int i = 1; i <= 100000000; i++) {
+			Total++;
+		}
+	}
+
+-----------------------------------------------------------------------------------------------------
+
+# To protect shared resources
+
+# Using Interlocked.Increment() method:
+	-- increments a specified variable and stores the result as an atomic operation
+
+e.g:
+	=> Total++; to 
+	=> Interlocked.Increment(ref Total);
+
+-----------------------------------------------------------------------------------------------------
+
+# Using Locking
+
+	static object _lock = new object();
+
+	for(int i = 1; i <= 1000000; i++) {
+
+		lock(_lock) 
+		{
+			Total++;
+		}
+	}
+
+-----------------------------------------------------------------------------------------------------
+
+# which option is better
+
+Interlocked class:
+	-- better from performance perspective 
+	-- can be used with addition/subtraction (increment, decrement, add etc) on int or long field
+	-- this class has methods for incrementing, decrementing, adding and reading variable atomically
+
+Locking:
+	-- locks out all the other threads except a single thread to read and increment the total variable
+	-- this ensures that the total variable is updated safely 
+	-- since all other threads are locked out there is a performance hit
