@@ -163,3 +163,34 @@
 	listCustomers.RemoveRange(1, 3) // removes 3 items from the list from index 1
 
 -----------------------------------------------------------------------------------------------------------
+
+# TrueForAll():
+	-- returns a boolean value
+	-- returns true if every item in the list matches the condition specified by predicate - lambda expression
+	
+e.g:
+	if(listCustomers.TrueForAll(c => c.Salary > 1000)) {}
+
+-----------------------------------------------------------------------------------------------------------
+
+# AsReadOnly():
+	-- returns a readonly wrapper for the current collection
+	-- use this if the client code should not modify the collection i.e add or remove elements
+	-- ReadOnlyCollection will not have methods to add or remove items from the collection
+	-- u can only read items fromt this collection
+
+e.g:
+	ReadOnlyCollection<Customer> readOnlyCustomers = listCustomers.AsReadOnly();
+	int count = readOnlyCustomers.Count;
+
+-----------------------------------------------------------------------------------------------------------
+
+# TrimExcess():
+	-- sets the capacity to the actual number of elements in the list
+	-- only if capacity is less than a threshold value
+	-- used to minimize collection's memory overhead, if no new elements will be added to the collection
+	-- current threshold is 90 percent in msdn for c#
+
+e.g 
+	int capacity = listCustomer.Capacity; // 100
+	listCustomers.TrimExcess(); // 3

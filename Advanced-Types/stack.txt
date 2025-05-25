@@ -1,0 +1,27 @@
+# Generic Stack Collection Class
+
+-- namespace: System.Collections.Generic
+-- stack is a generic LIFO(Last In First Out) collection class 
+
+-- the last item added(pushed) to the stack will be the first item to be removed(popped) from the stack
+
+-----------------------------------------------------------------------------------------------------------
+
+# Push(): 	to insert an item at the top of the stack
+# Pop(): 	to remove and return item present at the top of the stack
+# Contains():	to check if an item exists in the queue - returns boolean value
+# Peek():	to return the item at the top of the stack 
+
+-----------------------------------------------------------------------------------------------------------
+
+e.g:
+
+	Stack<Customer> stackCustomer = new Stack<Customer>();
+	stackCustomer.Push(c1);
+	stackCustomer.Push(c2);
+	stackCustomer.Push(c3);
+
+	Customer c = stackCustomer.Pop(); // removes and returns top item from the stack 
+	Customer cc = stackCustomer.Peek(); // returns top item from the stack 
+	
+	foreach(Customer c in stackCustomer) {} // returns from top to bottom

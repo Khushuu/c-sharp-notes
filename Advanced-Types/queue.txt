@@ -1,0 +1,27 @@
+# Generic Queue Collection Class
+
+-- namespace: System.Collections.Generic
+-- queue is a generic FIFO(Firt In First OUt) collection class 
+
+-- the first item to be added(enqueued) to the queue will be the first to be removed(dequeued) from the queue
+
+-----------------------------------------------------------------------------------------------------------
+
+# Enqueue(): 	to add items to the queue
+# Dequeue(): 	to remove and return an item from the beginning of the queue
+# Conatins(): 	to check if an item exists in the queue - returns boolean value
+# Peek():	to return an item from the beginning of the queue
+# Count:	to return the count of items in the queue
+
+-----------------------------------------------------------------------------------------------------------
+
+e.g:
+	Queue<Customer> queueCustomer = new Queue<Customer>();
+	queueCustomer.Enqueue(c1);
+	queueCustomer.Enqueue(c2);
+	queueCustomer.Enqueue(c3);
+
+	Customer c = queueCustomer.Dequeue(); // removes and returns the first item
+	Customer cc = queueCustomer.Peek(); // returns the first item
+
+	foreach(Customer c in queueCustomer) {}	
