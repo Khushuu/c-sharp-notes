@@ -1,0 +1,45 @@
+# Difference between Monitor and lock in c#
+
+-- both Monitor class and lock provides a mechanism that synchronizes access to objects
+-- lock is shortcut for Monitor.Enter with try and finally
+
+-- if u need more control to implement advanced multithreading solution
+-- using TryEnter(), Wait(), Pulse() & PulseAll() methods - then Monitor class is the option
+
+-----------------------------------------------------------------------------------------------------
+
+lock:
+
+	static object _lock = new object();
+	
+	public static void AddOneMilion() {
+
+		for(int i = 1; i <= 1000000; i++) {
+
+			lock(_lock) 
+			{
+				Total++;
+			}
+		}
+	}
+
+-----------------------------------------------------------------------------------------------------
+
+monitor:
+
+	static object _lock = new object();
+	
+	public static void AddOneMilion() {
+
+		for(int i = 1; i <= 1000000; i++) {
+
+			Monitor.Enter(_lock);
+			try {
+				Total++;
+			}
+			finally {
+				Monitor.Exit(_lock);
+			}
+		}
+	}
+	

@@ -77,11 +77,14 @@ e.g:
 
 	static object _lock = new object();
 
-	for(int i = 1; i <= 1000000; i++) {
+	public static void AddOneMilion() {
 
-		lock(_lock) 
-		{
-			Total++;
+		for(int i = 1; i <= 1000000; i++) {
+
+			lock(_lock) 
+			{
+				Total++;
+			}
 		}
 	}
 
