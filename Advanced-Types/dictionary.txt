@@ -1,0 +1,81 @@
+# Dictionary
+
+-- namespace: System.Collections.Generic
+
+-- collection of key-value pairs
+-- provides fast look up for values using keys
+-- keys in dictionary should be unique 
+	-- Runtime error: System.ArgumentException: An item with same key has already been added 
+
+-- specify the type for key and value when creating dictionary
+
+
+-- instead of using KeyValuePair when iterating over dictionary u can also use var keyword 
+
+	foreach(KeyValuePair<int, Worker> kvp in workerDict) {}
+
+
+** to just loop through the keys:
+
+	foreach(int key in workerDict.Keys) {}
+
+** to just loop through the values:
+
+	foreach(Worker worker in workerDict.Values) {}
+
+** to check if a key already exists or not in a dictionary
+
+	if(!workerDict.ContainsKey(1)) { // add key-value pair with key 1}
+
+** if a key does not exist in dictionary u get:
+
+	Error: KeyNotFoundException
+
+------------------------------------------------------------------------------------------------------------
+
+# Dictionary class methods
+
+
+# TryGetValue(): 
+	-- when not sure if dictionary contains a specific key 
+	-- returns the value associated with the key
+	-- expects two parameters - key and the out value to be returned 
+	-- returns boolean value
+	-- if key is found output parameter will have the value 
+
+	if(workerDict.TryGetValue(1, out Worker w)) {}
+
+------------------------------------------------------------------------------------------------------------
+
+# Count:
+
+	-- present as a property and as a function
+	-- to filter and get count based on some condition
+	
+	int count = workerDict.Count(kvp => kvp.Value.Salary > 1000);
+
+------------------------------------------------------------------------------------------------------------
+
+# Remove():
+
+	-- to remove an item from a dictionary
+	-- pass the key in the function 
+	-- if the key is not present no exception will be thrown 
+
+	workerDict.Remove(1);
+
+------------------------------------------------------------------------------------------------------------
+
+# Clear():
+
+	-- to delete all items from the dictionary 
+
+------------------------------------------------------------------------------------------------------------
+
+# ToDictionary():
+
+	-- converts an array or list to a dictionary
+
+	Dictionary<int, Worker> dict = comparyWorkers.ToDictionary(worker => worker.id, worker => worker);
+
+------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,110 @@
+# Sort list of simple types 
+	
+	-- to sort list of simple types like int, string, char etc: use Sort() method
+	-- to return data in descending order: use Reverse() method
+	-- does not return anything - does in-place sorting	
+
+		nums.Sort(); // no return type
+		nums.Revers(); // sorted in descending order - no return type 
+
+	-- Sort method does not work on complex types like classes
+	-- Error: InvalidOperationException: failed to compare two elements in the array
+	
+	-- implement IComparable interface to define how to sort complex types
+	-- simple types like int, string, char etc have IComparable interface already implemented 
+
+-----------------------------------------------------------------------------------------------------------'
+
+# Sort list of complex types
+
+
+# to sort a list of complex types without using LINQ 
+	-- the complex type has to implement IComparable interface
+	-- and provide implementation for CompareTo() method
+
+# CompareTo() 
+	-- returns an integer value
+	-- if return value is: 
+		-- Greater than Zero: 	the current instance is greater than the object being compared with
+		-- Less than Zero: 	the current instance is less than the object being compared with
+		-- is Zero:		the current instance is equalt to the object being compared with
+
+-- or you can also invoke CompareTo() method on simple types
+
+-- Sort() and Reverse() method both use the CompareTo() method defined within complex type class
+
+e.g: 
+	return this.Salary.CompareTo(obj.Salary);
+
+------------------------------------------------------------------------------------------------------------
+
+# Using custom class impelementing IComparer interface
+
+-- if you prefer not to use the sort functionality provided by the class
+-- u can provide your own by implementing IComparer interface - Compare method
+
+e.g: sorting customers by name
+
+-- Step 1: Implement IComparer interface
+
+	public class SortByName: IComparer<Customer> 
+	{
+		public int Compare(Customer a, Customer b) 
+		{	
+			return a.Name.CompareTo(b.Name);
+		}
+	}
+
+-- Step 2: Pass an instance of the class that implements IComparer interface, as an argument to the Sort() method
+
+e.g:
+	SortByName sortByName = new SortByName();
+	listCustomers.Sort(sortByName);
+
+------------------------------------------------------------------------------------------------------------
+
+# Sort a list of complex types using Comparison delegate 
+
+-- an overload of Sort method expects Comparison delegate to be passed an an argument
+
+public void Sort(Comparison<T> comparison);
+
+# Step 1:
+	-- create a function whose signature matches the signature of System.Comparison delegate
+	-- in this method write the logic to compare 2 customer objects
+
+	e.g
+		private static int CompareCustomers(Customer a, Customer b) 
+		{
+			return a.Id.CompareTo(b.Id);
+		}
+
+# Step 2:
+	-- create an instance of System.Comparison delegate
+	-- pass the name of the function created as an argument to this delegate
+	-- now the comparison delegate is pointing to the method with the logic to compare two objects
+
+	e.g
+		Comparison<Customer> customComparer = new Comparison<Customer>(CompareCutomers);
+
+# Step 3:
+	-- pass the delegate instance as an argument to the Sort() function
+	
+	e.g 
+		listCustomers.Sort(customComparer);
+
+------------------------------------------------------------------------------------------------------------
+
+# By using just delegate keyword
+
+e.g
+	listCustomers.Sort(delegate(Cutomer a, Customer b) {
+		return (a.id.CompareTo(b.id));
+	});
+
+------------------------------------------------------------------------------------------------------------
+
+# Using Lambda expression
+
+e.g
+	listCustomers.Sort((a, b) => a.id.CompareTo(b.id));

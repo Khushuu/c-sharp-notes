@@ -1,0 +1,165 @@
+# List collection class 
+
+-- one of the generic collection classes : 
+	-- Dictionary
+	-- List
+	-- Stack
+	-- Queue
+
+-- present in System.Collecions.Generic namespace
+
+-- List can be used to create collection of any type
+-- objects stored in the list can be accessed by index 
+-- unlike arrays it grows in size automatically
+
+-- provides methods to search, sort and manipulate lists
+
+-- List is strongly typed
+-- only items of same type can be added to the list
+-- also items that inherit from the defined type can be added to the list 
+
+-- if BakeryCustomer class inherits from Customer class then in the list of customer class
+-- even bakeryCustomer instance can be added as an item 
+
+-------------------------------------------------------------------------------------------------------------
+
+# to iterate over the list
+
+
+	foreach(Customer cust in customers) {}
+	for(int i = 0; i < customers.Count; i++) {}
+
+-------------------------------------------------------------------------------------------------------------
+
+# List class methods
+
+
+# Add(): 		to add items at the end of the list 
+# Insert(index, item): 	to insert at a specific location in the list 
+# IndexOf(item):	returns the first index of the item encountered else return -1 if not found
+# Remove():		removes first matching item from the list - specified by lambda expression
+# RemoveAt(): 		removes the item at the specified index
+# RemoveAll():		removes all the items that match the specified condition
+# Clear():		removes all the items from the list 
+
+-----------------------------------------------------------------------------------------------------------
+
+# Contains(item):
+	-- checks if an item exists in the list
+	-- returns boolean value
+	-- returns true if item exists else false
+
+	if(customers.contains(c1)) {}	
+
+-----------------------------------------------------------------------------------------------------------
+
+# Exists():
+	-- checks if an item exists in the list based on a condition defined by lambda expression
+	-- returns boolean value
+	-- returns true if item exists else false 
+
+	if(customers.exists(c => c.Name.StartsWith("K"))) {}
+
+-----------------------------------------------------------------------------------------------------------
+
+# Find():
+	-- searches an element that matches the condition defined by lambda expression
+	-- returns the first matching item from the list	
+	
+	Customer c = customers.FindLast(cust => cust.Salary > 1000);
+
+-----------------------------------------------------------------------------------------------------------
+
+# FindLast():
+	-- searches an element that matches the condition defined by lambda expression
+	-- returns the last matching item from the list	
+
+	Customer c = customers.Find(cust => cust.Salary > 1000);
+
+-----------------------------------------------------------------------------------------------------------
+
+# FindAll():
+	-- returns all items that match the condition defined by lambda expression
+	
+	List<Customer> c = customers.Find(cust => cust.Salary > 1000);
+
+-----------------------------------------------------------------------------------------------------------
+
+# FindIndex():
+	-- returns the index of the first item that matches condition  defined by lambda expression
+	-- 2 overloads that allow to specify the range to search within the list
+
+	Customer c = customers.FindIndex(cust => cust.Salary > 1000);
+
+	// startIndex, count, lambda_expression
+	Customer c = customers.FindIndex(2, 4, cust => cust.Salary > 1000);
+
+-----------------------------------------------------------------------------------------------------------
+
+# FindLastIndex():
+	-- returns the index of the last item that matches condition  defined by lambda expression
+	-- 2 overloads that allow to specify the range to search within the list
+	
+	Customer c = customers.FindLastIndex(cust => cust.Salary > 1000);
+	
+	// startIndex, count, lambda_expression
+	Customer c = customers.FindLastIndex(cust => cust.Salary > 1000);
+
+-----------------------------------------------------------------------------------------------------------
+
+# ToList():
+	-- converts an array to a list
+	-- returns a list 
+
+	List<Customer> customers = cust.ToList();
+
+-----------------------------------------------------------------------------------------------------------
+
+# ToArray():
+	-- converts a list to an array
+	-- returns an array
+
+	Customer[] cust = customers.ToArray();
+
+-----------------------------------------------------------------------------------------------------------
+
+# ToDictionary():
+	-- converts a list to a dictionary
+	-- returns a dictionary
+	
+	Dictionary<int, Customer> dict = customers.ToDictionary(c => c.Id, c => c)
+
+-----------------------------------------------------------------------------------------------------------
+
+# List range functions
+
+# AddRange():
+	-- allows to add another list of items to the end of the list 
+	
+	listCustomers.AddRange(listAdults);
+
+-----------------------------------------------------------------------------------------------------------
+
+# GetRange():
+	-- expects 2 parameters: start_index, number_of_items_to_return
+	-- returns a list of items from the list
+
+	List<Customer> adults = listCustomers.GetRange(3, 5) // returns 5 customer from index 3
+
+-----------------------------------------------------------------------------------------------------------
+
+# InsertRange():
+	-- allows to insert a list of items from the specified index 
+
+	listCustomers.InsertRange(0, listAdults); // inserts listAdults at index 0
+
+-----------------------------------------------------------------------------------------------------------
+
+# RemoveRange():
+	-- expects 2 parameters: start_index, number_of_items_to_remove
+	-- removes a range of items from the list
+	-- to remove all items without specifying an condition - use Clear()
+
+	listCustomers.RemoveRange(1, 3) // removes 3 items from the list from index 1
+
+-----------------------------------------------------------------------------------------------------------
