@@ -111,6 +111,7 @@
 - Alternative hosting model has been adopted.
 - Separates **web applications from underlying host**.
 
+
 ### Kestrel HTTP server
 - **Fast, cross-platform HTTP server**.
 - ASP.NET Core can run on Kestrel.
